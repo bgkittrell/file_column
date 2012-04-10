@@ -1,6 +1,8 @@
 require 'fileutils'
 require 'tempfile'
 require 'magick_file_column'
+require 'file_column_helper'
+require 'validations'
 
 module FileColumn # :nodoc:
   def self.append_features(base)
@@ -593,7 +595,6 @@ module FileColumn # :nodoc:
 
     # default options. You can override these with +file_column+'s +options+ parameter
     DEFAULT_OPTIONS = {
-      :root_path => File.join(Rails.root, "public"),
       :web_root => "",
       :mime_extensions => MIME_EXTENSIONS,
       :extensions => EXTENSIONS,
@@ -613,7 +614,8 @@ module FileColumn # :nodoc:
     # You can pass in an options hash that overrides the options
     # in +DEFAULT_OPTIONS+.
     def file_column(attr, options={})
-      options = DEFAULT_OPTIONS.merge(options) if options
+      defaults = DEFAULT_OPTIONS.merge({ :root_path => File.join(Rails.root, "public") })
+      options = defaults.merge(options) if options
       
       my_options = FileColumn::init_options(options, 
                                             ActiveSupport::Inflector .underscore(self.name).to_s,
