@@ -8,7 +8,7 @@ db = 'file_column_test'
 ActiveRecord::Base.establish_connection(
   :adapter  => "mysql",
   :host     => "localhost",
-  :username => "rails",
+  :username => "root",
   :password => "",
   :database => db,
   :socket => "/var/run/mysqld/mysqld.sock"

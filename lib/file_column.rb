@@ -3,6 +3,8 @@ require 'tempfile'
 require 'magick_file_column'
 require 'file_column_helper'
 require 'validations'
+require 'rails_file_column'
+require 'file_compat'
 
 module FileColumn # :nodoc:
   def self.append_features(base)
